@@ -11,10 +11,10 @@ const wrapper = (props) => {
     <div id="wrapper" style={style}>
       <div className="wrapperContent">
         <Banner img={props.banner} />
-        <Sorteio display={props.display} sortear={props.sortear} />
-        <div>
-        <button>Sortear</button>
-      </div>
+        <Sorteio display={props.display} />
+        <div className="btn_sortear">
+          <button className="btn" onClick={props.clicked}>SORTEAR</button>
+        </div>
       </div>
     </div>
   )

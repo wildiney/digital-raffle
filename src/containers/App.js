@@ -17,62 +17,53 @@ class App extends Component {
       { nome: 'Nome 06', telefone: '11 5555 5555' },
       { nome: 'Nome 07', telefone: '11 6666 6666' }
     ],
-    selectedPerson: { name: 'Boa sorte!', telefone: '00 0000 0000' },
-    sorteado: false
+    selectedPerson: { name: 'Boa sorte!', extraField: '00 0000 0000' },
+    timeToSort: 5000,
+    sorted: false
   };
 
   sortear = () => {
     const participantes = this.state.participantes;
     const indice = Math.floor(Math.random() * participantes.length);
-    const nome = participantes[indice].nome;
-    const telefone = participantes[indice].telefone;
+    const selName = participantes[indice].nome;
+    const eField = participantes[indice].telefone;
 
-    return { nome, telefone };
+    this.setState({ selectedPerson: { name: selName, extraField: eField } });
   };
 
-  showDisplay = () => {
-    const amountChars = this.state.amountChars;
-    const sorteado = this.sortear();
-    const nome = sorteado.nome.padEnd(amountChars, ' ');
-    const name = nome.split('');
-    const telefone = sorteado.telefone;
+  /*blink = () => {
+    let style = { visibility: "hidden" }
+  }*/
 
-    return { name, telefone };
+  sortNameHandler = () => {
+    let int = setInterval(() => {
+      this.sortear();
+    }, 10);
+    
+    setTimeout(() => {
+      clearInterval(int);
+    }, 3000);
   };
-
-
-  convertToSquares = (text) => {
-    let textSplit = text.split('')
-    textSplit.map((char, index) => {
-      return <Display char={char} key={index} />;
-    })
-  }
-
-  displaySorteio = () => {
-    return this.convertToSquares(this.state.selectedPerson.name);
-  };
-
-  displayBoaSorte = () => {
-    return this.convertToSquares('Boa Sorte!')
-  }
-
-  displayRendered = () => {
-    if (this.state.sorteado === true) {
-      this.displaySorteio()
-    } else {
-      this.displayBoaSorte();
-    }
-  };
-
-  result = this.displayRendered();
 
   render() {
+    let display = null;
+
+    let name = this.state.selectedPerson.name.padEnd(
+      this.state.amountChars,
+      ' '
+    );
+    let nameSplited = name.split('');
+    display = nameSplited.map((char, index) => {
+      return <Display char={char} key={index} />;
+    });
+
     return (
       <div className="App">
         <Wrapper
           background={this.state.background}
           banner={this.state.banner}
-          display={() => this.displayRendered }
+          display={display}
+          clicked={this.sortNameHandler}
         />
       </div>
     );
