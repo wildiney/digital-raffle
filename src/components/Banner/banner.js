@@ -7,7 +7,7 @@ const banner = (props)=>{
   }
  
   return(
-    <div id="banner" style={style}>
+    <div id="banner" className="wrapperItem" style={style}>
       
     </div>
   )

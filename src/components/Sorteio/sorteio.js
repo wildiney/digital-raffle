@@ -3,7 +3,7 @@ import './sorteio.css'
 
 const sorteio = (props) => {
   return (
-    <div id="sorteio">
+    <div id="sorteio" className="wrapperItem">
       {props.display}
     </div>
   )
