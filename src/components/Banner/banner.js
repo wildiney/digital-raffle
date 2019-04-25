@@ -1,5 +1,5 @@
 import React from 'react'
-import './banner.css'
+import classes from './Banner.module.css'
 
 const banner = (props)=>{
   const style = {
@@ -7,8 +7,8 @@ const banner = (props)=>{
   }
  
   return(
-    <div id="banner" className="wrapperItem" style={style}>
-      
+    <div className={[classes.banner, classes.wrapperItem].join(' ')} style={style}>
+      {props.children}
     </div>
   )
 }

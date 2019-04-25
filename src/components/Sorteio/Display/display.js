@@ -1,9 +1,9 @@
 import React from 'react'
-import './display.css'
+import classes from './Display.module.css'
 
 const display = (props)=>{
   return(
-    <span className='quad nome'><span>{props.char}</span></span>
+    <span className={[classes.quad, classes.nome].join(' ')}><span>{props.char}</span></span>
   );
 }
 

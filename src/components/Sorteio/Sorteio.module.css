@@ -1,0 +1,29 @@
+
+.sorteio {
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+}
+.wrapperItem {
+  align-items: center;
+  justify-content: center;
+}
+.btn {
+  border-radius: 7px;
+  border: 1px solid gray;
+  padding: 7px;
+  width: 33%;
+  height: 80%;
+  font-weight: bold;
+  font-size: 0.7rem;
+}
+.btn_sorteio {
+  height: 15%;
+}
+.btn_sortear {
+  display: flex;
+}
+.btn_sortear .btn {
+  margin: 0 auto;
+}
+
