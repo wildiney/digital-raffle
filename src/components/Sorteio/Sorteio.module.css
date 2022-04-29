@@ -1,8 +1,9 @@
 
 .sorteio {
-  overflow: hidden;
+  /* overflow: hidden; */
   display: flex;
   flex-wrap: wrap;
+  /* padding:20px; */
 }
 .wrapperItem {
   align-items: center;
@@ -11,11 +12,10 @@
 .btn {
   border-radius: 7px;
   border: 1px solid gray;
-  padding: 7px;
-  width: 33%;
-  height: 80%;
+  padding: 1rem;
+  width: 100%;
   font-weight: bold;
-  font-size: 0.7rem;
+  font-size: .8rem;
 }
 .btn_sorteio {
   height: 15%;
@@ -27,3 +27,14 @@
   margin: 0 auto;
 }
 
+hr{
+  display: block;
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .btn {
+    font-size: 1.5rem;
+    padding: 1.5rem;
+  }
+}

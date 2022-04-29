@@ -1,26 +1,25 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Layout from '../components/Layout/Layout';
 import './App.css';
 import Banner from '../components/Banner/banner';
 import Sorteio from '../components/Sorteio/sorteio';
+import Footer from '../components/Footer/footer';
 
-class App extends Component {
-  state = {
-    background: 'https://loremflickr.com/1920/1080/frame',
-    banner: 'https://loremflickr.com/1920/150/abstract'
-  }
 
-  render() {
-    
-    return (
-      <div className="App">
-        <Layout background={this.state.background} >
-          <Banner img={this.state.banner} />
-          <Sorteio />
-        </Layout>
-      </div>
-    );
-  }
+const App = () => {
+  const [background] = useState('https://via.placeholder.com/1920x1080/?text=Background');
+  const [banner] = useState('https://via.placeholder.com/1160x220/?text=Banner');
+
+
+  return (
+    <div className="App" >
+      <Layout background={background} >
+        <Banner img={banner} />
+        <Sorteio />
+        <Footer />
+      </Layout>
+    </div >
+  );
 }
 
 export default App;

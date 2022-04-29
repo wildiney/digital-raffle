@@ -2,14 +2,14 @@ import React from 'react';
 import classes from './Layout.module.css';
 
 
-const layout = (props) => {
+const layout = ({ background, children }) => {
   const style = {
-    backgroundImage: `url(${props.background})`
+    backgroundImage: `url(${background})`
   }
   return (
     <div className={classes.content} style={style}>
       <div className={classes.wrapperContent}>
-        {props.children}
+        {children}
       </div>
     </div>
   )

@@ -1,110 +1,121 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import Display from './Display/display';
-import Aux from '../../hoc/Auxiliary';
 import classes from './Sorteio.module.css';
+import Participantes from '../../assets/participantes.json';
 
-class Sorteio extends Component {
-  constructor(props) {
-    super(props);
+const Sorteio = (props) => {
 
-    this.state = {
-      amountChars: 30,
-      participantes: [
-        /*{
-          nome: 'Wildiney Fernando Pimentel Di Masi',
-          telefone: '11 0000 0000'
-        },
-        { nome: 'Nome Sobrenome de 02 mais eu', telefone: '11 1111 1111' },
-        { nome: 'Nome Sobrenome de 03 mais eu', telefone: '11 2222 2222' },
-        { nome: 'Nome Sobrenome de 04 mais eu', telefone: '11 3333 3333' },
-        { nome: 'Nome Sobrenome de 05 mais eu', telefone: '11 4444 4444' },
-        { nome: 'Nome Sobrenome de 06 mais eu', telefone: '11 5555 5555' },
-        { nome: 'Nome Sobrenome de 07 mais eu', telefone: '11 6666 6666' }*/
-      ],
-      selectedPerson: { name: 'Boa sorte!', extraField: '00 0000 0000' },
-      timeToSort: 5000,
-      sorted: false
-    };
+  const [amountChars] = useState(20);
+  const [participantes, setParticipantes] = useState([])
+  const [selectedPerson, setSelectedPerson] = useState({ name: 'Boa  sorte', phone: '00 0000 0000', company: 'company' });
+  const [displayName, setDisplayName] = useState(true);
+  const [displayPhone, setDisplayPhone] = useState(false);
+  const [displayCompany, setDisplayCompany] = useState(true)
+  const [timeToSort] = useState(5000);
+  // const [sorted] = useState(false);
 
-    this.jsonData = 'http://localhost:4200/participantes';
-    console.log(this.state.participantes)
-  }
 
-  componentDidMount() {
-    this.getParticipantes();
-    console.log(this.state.participantes);
-  }
+  useEffect(() => {
+    function setUpDisplayName() {
+      const name = selectedPerson.name.padEnd(amountChars, ' ');
+      const nameSplited = name.split('');
+      return nameSplited.map((char, index) => {
+        return <Display char={char} key={index} />;
+      });
+    }
 
-  getParticipantes = () => {
-    console.log('Getting data');
-    fetch(this.jsonData)
-      .then(response => response.json())
-      .then(data => this.setState({ participantes: data }))
-      .then(console.log(this.state.participantes));
-      
+    const setUpDisplayPhone = () => {
+      const phone = selectedPerson.phone;
+      const lastDigits = phone.slice(-4);
+      const maskedPhone = "*****-" + lastDigits
+      const phoneSplited = maskedPhone.split('');
+      return phoneSplited.map((char, index) => {
+        return <Display char={char} key={index} />;
+      });
+    }
+
+    const setUpDisplayCompany = () => {
+      const company = selectedPerson.company.padEnd(10, ' ');
+      const companySplited = company.split('');
+      return companySplited.map((char, index) => {
+        return <Display char={char} key={index} />;
+      });
+    }
+
+    setParticipantes(Participantes.participantes);
+    setDisplayName(setUpDisplayName());
+    setDisplayPhone(setUpDisplayPhone());
+    setDisplayCompany(setUpDisplayCompany());
+    // const url = 'https://cors-anywhere.herokuapp.com/http://wildiney.com/testes/participantes.json';
+    // fetch(url)
+    //   .then(result => result.json())
+    //   .then(result => {
+    //     this.setState({
+    //       participantes: result.participantes
+    //     });
+    //     console.log("CDM", participantes);
+    //     console.log("CDM", banner);
+    //   })
+  }, [amountChars, selectedPerson.company, selectedPerson.name, selectedPerson.phone]);
+
+
+
+  const sortear = () => {
+    if (participantes.length !== undefined) {
+      const indice = Math.floor(Math.random() * participantes.length);
+      const selName = participantes[indice].name.substring(0, 29).toUpperCase();
+      const phone = participantes[indice].phone;
+      const company = participantes[indice].company;
+      setSelectedPerson({ name: selName, phone: phone, company: company });
+    } else {
+      alert("Não há participantes habilitados")
+      return false;
+    }
   };
 
-  sortear = () => {
-    const participantes = this.state.participantes;
-    const indice = Math.floor(Math.random() * participantes.length);
-    const selName = participantes[indice].nome.substring(0, 29).toUpperCase();
-    const eField = participantes[indice].telefone;
-    this.setState({ selectedPerson: { name: selName, extraField: eField } });
-  };
-
-  sortNameHandler = () => {
+  const sortNameHandler = () => {
     let int = setInterval(() => {
       document.getElementById('sorteio').classList.remove('blink');
-      this.sortear();
+      sortear();
     }, 100);
 
     setTimeout(() => {
       clearInterval(int);
       document.getElementById('sorteio').classList.add('blink');
       console.table({
-        Name: this.state.selectedPerson.name,
-        Field: this.state.selectedPerson.extraField
+        Name: selectedPerson.name,
+        Field: selectedPerson.phone
       });
-    }, 2000);
+    }, timeToSort);
   };
 
-  render() {
-    let display = null;
-
-    let name = this.state.selectedPerson.name.padEnd(
-      this.state.amountChars,
-      ' '
-    );
-    let nameSplited = name.split('');
-    display = nameSplited.map((char, index) => {
-      return <Display char={char} key={index} />;
-    });
-
-    return (
-      <Aux>
-        <div
-          id="sorteio"
-          className={[classes.wrapperItem, classes.sorteio].join(' ')}
+  return (
+    <>
+      <div
+        id="sorteio"
+        className={[classes.wrapperItem, classes.sorteio].join(' ')}
+      >
+        {displayName ? displayName : null}
+        <hr />
+        {displayPhone ? displayPhone : null}
+        {displayCompany ? displayCompany : null}
+      </div>
+      <div
+        className={[
+          classes.wrapperItem,
+          classes.btn_sorteio,
+          classes.btn_sortear
+        ].join(' ')}
+      >
+        <button
+          className={[classes.btn].join(' ')}
+          onClick={sortNameHandler}
         >
-          {display}
-        </div>
-        <div
-          className={[
-            classes.wrapperItem,
-            classes.btn_sorteio,
-            classes.btn_sortear
-          ].join(' ')}
-        >
-          <button
-            className={[classes.btn].join(' ')}
-            onClick={this.sortNameHandler}
-          >
-            SORTEAR
-          </button>
-        </div>
-      </Aux>
-    );
-  }
+          SORTEAR
+        </button>
+      </div>
+    </>
+  );
 }
 
 export default Sorteio;

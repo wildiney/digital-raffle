@@ -1,14 +1,14 @@
 import React from 'react'
 import classes from './Banner.module.css'
 
-const banner = (props)=>{
+const banner = ({ img, children }) => {
   const style = {
-    backgroundImage: `url(${props.img})`
+    backgroundImage: `url(${img})`
   }
- 
-  return(
+
+  return (
     <div className={[classes.banner, classes.wrapperItem].join(' ')} style={style}>
-      {props.children}
+      {children}
     </div>
   )
 }

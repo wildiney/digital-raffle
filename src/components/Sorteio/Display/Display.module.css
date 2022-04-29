@@ -6,16 +6,14 @@
   color: rgba(255, 255, 255, 0.9);
   text-shadow: 1px 1px 0 rgba(140, 140, 140, 0.6),
     -2px -2px 2px rgba(0, 0, 0, 0.8);
-  margin: 0.2% auto;
   justify-content: center;
   align-items: center;
   align-content: center;
-  width: 45px;
-  height: 45px;
-  margin: 1px;
+  width: 20%;
   /*flex-basis: 9.1%;*/
   flex-grow: 0;
   flex-shrink: 0;
+  aspect-ratio: 1/1;
 
   /* BACKGROUND */
   background: #959595;
@@ -53,10 +51,28 @@
 }
 .quad.nome {
   font-family: Arial, sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: bold;
   text-align: center;
 }
+@media screen and (min-width: 768px) {
+  .quad {
+    width: 10%;
+  }
+  .quad.nome{
+    font-size: 2rem;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .quad {
+    width: 10%;
+  }
+
+  .quad.nome {
+    font-size: 3rem;
+  }
+}
+/*
 @media (min-width: 576px) and (orientation: landscape) {
   .quad {
     width: 50px;
@@ -93,8 +109,8 @@
 }
 @media (min-width: 320px) and (orientation: portrait) {
   .quad {
-    width: 45px;
-    height: 45px;
+    width: 8,vh;
+    height: 8vh;
   }
 }
 
@@ -106,8 +122,8 @@
 }
 @media (min-width: 768px) and (orientation: portrait) {
   .quad {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     border-radius: 18px;
   }
   .quad.nome {
@@ -130,3 +146,4 @@
     margin: 0 auto;
   }
 }
+*/
