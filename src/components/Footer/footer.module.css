@@ -1,0 +1,9 @@
+footer{
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid rgb(199, 199, 199);
+}
+
+.copyright{
+  font-size: 0.8rem;
+}
