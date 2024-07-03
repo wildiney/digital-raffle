@@ -7,14 +7,12 @@ Draw names with an animation like airport old letterings
 
 ## HOW TO USE
 
-Fill src/assets/atendees.json with your data
-Run
-
-```node
-npm install
-npm start
-```
+Fill src/assets/atendees.json with your data and run the application
 
 ## CUSTOMIZATION
 
-You can replace the variables in App.js about banner and background. In future versions this will be replaced by props.
+You can replace the variables in App.tsx to setup banner and background.
+
+## SCREENSHOTS
+
+![Screenshot01]('https://github.com/wildiney/digital-raffle/blob/master/screenshots/screenshot01.png')
