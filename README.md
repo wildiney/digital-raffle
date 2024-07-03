@@ -15,4 +15,4 @@ You can replace the variables in App.tsx to setup banner and background.
 
 ## SCREENSHOTS
 
-![Screenshot01]('https://github.com/wildiney/digital-raffle/blob/master/screenshots/screenshot01.png')
+![Screenshot01](https://raw.githubusercontent.com/wildiney/digital-raffle/master/screenshots/screenshot01.png)
