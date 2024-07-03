@@ -7,7 +7,7 @@ Draw names with an animation like airport old letterings
 
 ## HOW TO USE
 
-Fill src/assets/atendees.json with valid data
+Fill src/assets/atendees.json with your data
 Run
 
 ```node
